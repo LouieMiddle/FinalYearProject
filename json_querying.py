@@ -32,15 +32,10 @@ def load_json_data_mipl():
 
 
 mipl_json = load_json_data_mipl()
-mipl_json.describe()
 
 batsman_ball_type = mipl_json.pivot_table(columns=['batsman_name', "delivery_type"], aggfunc='size')
-print(batsman_ball_type)
+batsman_ball_type.to_csv('Pre-processing-csvs/batsman_ball_type')
 
 # Visualiser (heat maps land and wicket passing) (swing and spin rate)
 # Visualiser per ball / over for each ground etc.
-# Tree map of jsons
-# Pull out data into CSV
-# Write about why sports analytics important
-# Some examples (no need to go into depths of ML)
 # Need to separate spin balls and seam balls, so slow seam balls don't get lumped in with spin balls
