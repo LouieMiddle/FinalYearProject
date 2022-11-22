@@ -23,7 +23,7 @@ def plot_all_innings(data, colour):
 def plot_all_innings_over_overs(data, colour):
     total_runs = []
     for over in range(1, 21):
-        over_data = data[data['over'] == str(over)]
+        over_data = data[data['delivery_over'] == str(over)]
         over_runs = sum(over_data.runs)
         total_runs.append(over_runs)
 
@@ -32,7 +32,7 @@ def plot_all_innings_over_overs(data, colour):
 
 mipl_csv = load_csv_data_mipl()
 mipl_csv = filter_by_pitch_x_pitch_y(mipl_csv)
-mipl_csv[['innings', 'over', 'ball']] = mipl_csv['delivery'].str.split('.', 3, expand=True)
+mipl_csv[['delivery_innings', 'delivery_over', 'delivery_ball']] = mipl_csv['delivery'].str.split('.', 3, expand=True)
 
 matches = mipl_csv.groupby('matchId')
 
@@ -48,13 +48,13 @@ for matchId, match in matches:
             plt.show()
         plt.figure(figsize=(10, 10))
 
-    first_innings = match[match['innings'] == "1"]
+    first_innings = match[match['delivery_innings'] == "1"]
     first_innings = merge_no_balls_and_wides(first_innings)
     # plot_innings(first_innings, matchId, 1)
     # plot_all_innings(first_innings, colours[c])
     plot_all_innings_over_overs(first_innings, colours[c])
 
-    second_innings = match[match['innings'] == "2"]
+    second_innings = match[match['delivery_innings'] == "2"]
     merge_no_balls_and_wides(second_innings)
     # plot_innings(second_innings, matchId, 2)
     # plot_all_innings(second_innings, colours[c])

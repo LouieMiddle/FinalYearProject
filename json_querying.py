@@ -64,6 +64,3 @@ mipl_json = load_json_data_mipl(mipl_csv.columns)
 
 batsman_ball_type = mipl_json.pivot_table(columns=['batsman_name', "delivery_type"], aggfunc='size')
 batsman_ball_type.to_csv('Pre-processing-csvs/batsman_ball_type')
-
-# TODO
-#  Read JSON into pandas dataframe (using pandas method)
