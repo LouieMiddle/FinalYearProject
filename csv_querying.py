@@ -1,9 +1,31 @@
+import numpy as np
+
 from query_utils import filter_by_pitch_x_pitch_y, load_csv_data_mipl
 
 seam = ['FAST_SEAM', 'MEDIUM_SEAM', 'SEAM']
 
 mipl_csv = load_csv_data_mipl()
 mipl_csv = filter_by_pitch_x_pitch_y(mipl_csv)
+
+# bowler_count = mipl_csv.bowler.value_counts()
+# batter_count = mipl_csv.batter.value_counts()
+# print(np.mean(bowler_count))
+# print(np.mean(batter_count))
+
+# print("no batters " + str(mipl_csv.batter.nunique(dropna=True)))
+# print("no bowlers " + str(mipl_csv.bowler.nunique(dropna=True)))
+
+# batter_count = mipl_csv.batter.value_counts()
+# mipl_csv = mipl_csv[mipl_csv.batter.isin(batter_count.index[batter_count.gt(600)])]
+# print("no batters " + str(mipl_csv.batter.nunique(dropna=True)))
+# print("no bowlers " + str(mipl_csv.bowler.nunique(dropna=True)))
+# mipl_csv.to_csv('Pre-processing-csvs/batters_faced_more_than_600_balls_csv.csv')
+
+# bowler_count = mipl_csv.bowler.value_counts()
+# mipl_csv = mipl_csv[mipl_csv.bowler.isin(bowler_count.index[bowler_count.gt(600)])]
+# print("no batters " + str(mipl_csv.batter.nunique(dropna=True)))
+# print("no bowlers " + str(mipl_csv.bowler.nunique(dropna=True)))
+# mipl_csv.to_csv('Pre-processing-csvs/bowlers_bowled_more_than_600_balls_csv.csv')
 
 # jos_buttler = mipl_csv[mipl_csv['batter'] == 'Jos Buttler']
 # jos_buttler_seam = jos_buttler[jos_buttler['bowlingStyle'].isin(seam)]

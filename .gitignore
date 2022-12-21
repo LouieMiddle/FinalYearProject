@@ -1,4 +1,5 @@
 .idea/*
-/HawkeyeStats-main/
-/ipl_2022_data/
-/Pre-processing-csvs/
+/HawkeyeStats-main/*
+/ipl_2022_data/*
+/Pre-processing-csvs/*
+/cricsheet_ipl_json/*

@@ -52,16 +52,20 @@ for matchId, match in matches:
 
 transposed = np.array(runs_per_over).T
 
+elements_count = {}
 for runs in transposed:
-    elements_count = {}
+    # elements_count = {}
     for element in runs:
         if element in elements_count:
             elements_count[element] += 1
         else:
             elements_count[element] = 1
 
-    plt.bar(elements_count.keys(), elements_count.values())
-    plt.show()
+    # plt.bar(elements_count.keys(), elements_count.values())
+    # plt.show()
+
+plt.bar(elements_count.keys(), elements_count.values())
+plt.show()
 
 # i = 0
 # legend = []

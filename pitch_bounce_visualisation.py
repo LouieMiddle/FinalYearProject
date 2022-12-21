@@ -5,7 +5,7 @@ from scipy.stats import gaussian_kde
 from query_utils import load_csv_data_mipl, filter_by_pitch_x_pitch_y
 
 
-def plot_heatmap(data, r):
+def plot_heatmap(data, r, hand):
     x_min = min(data[:, 0])
     x_max = max(data[:, 0])
     y_min = min(data[:, 1])
@@ -18,54 +18,26 @@ def plot_heatmap(data, r):
     Z = np.reshape(kernel(positions).T, X.shape)
 
     fig, ax = plt.subplots()
-    fig.suptitle("Run " + str(r))
+    fig.suptitle(hand + " Run " + str(r))
     ax.imshow(np.rot90(Z), cmap=plt.cm.gist_earth_r, extent=[x_min, x_max, y_min, y_max])
     # ax.plot(data[:, 0], data[:, 1], 'k.', markersize=2)
 
-    STUMP_HEIGHT = 0.7112
-    STUMP_GAP = 0.08893
+    WICKET_LENGTH = 22.56
+    WICKET_WIDTH = 3.66
 
-    ax.set_ylim(-0.5, 2.5)
-    ax.set_xlim(-2, 2)
+    BATTING_CREASE_LENGTH = 1.22
 
-    # Draw stumps
-    x = [0, 0]
-    y = [0, STUMP_HEIGHT]
+    # Draw a pitch surface
+    x = [WICKET_WIDTH / 2,
+         -WICKET_WIDTH / 2,
+         -WICKET_WIDTH / 2,
+         WICKET_WIDTH / 2]
+    y = [WICKET_LENGTH - BATTING_CREASE_LENGTH,
+         WICKET_LENGTH - BATTING_CREASE_LENGTH,
+         -BATTING_CREASE_LENGTH,
+         -BATTING_CREASE_LENGTH]
+
     ax.plot(x, y, color='slategray', linewidth=3, zorder=10)
-
-    x = [STUMP_GAP, STUMP_GAP]
-    y = [0, STUMP_HEIGHT]
-    ax.plot(x, y, color='slategray', linewidth=3, zorder=10)
-
-    x = [-STUMP_GAP, -STUMP_GAP]
-    y = [0, STUMP_HEIGHT]
-    ax.plot(x, y, color='slategray', linewidth=3, zorder=10)
-
-
-def plot_balls_stumps(data, colour):
-    x_values = data.stumpsX
-    y_values = data.stumpsY
-
-    STUMP_HEIGHT = 0.7112
-    STUMP_GAP = 0.08893
-
-    plt.ylim(-0.5, 2.5)
-    plt.xlim(-2, 2)
-
-    # Draw stumps
-    x = [0, 0]
-    y = [0, STUMP_HEIGHT]
-    plt.plot(x, y, color='slategray', linewidth=3, zorder=10)
-
-    x = [STUMP_GAP, STUMP_GAP]
-    y = [0, STUMP_HEIGHT]
-    plt.plot(x, y, color='slategray', linewidth=3, zorder=10)
-
-    x = [-STUMP_GAP, -STUMP_GAP]
-    y = [0, STUMP_HEIGHT]
-    plt.plot(x, y, color='slategray', linewidth=3, zorder=10)
-
-    plt.scatter(x_values, y_values, s=0.2, color=colour)
 
 
 mipl_csv = load_csv_data_mipl()
@@ -84,9 +56,14 @@ for run in runs:
     # plot_balls_stumps(run_data, colours[c])
     # c += 1
 
-    xy = np.array(run_data[['stumpsX', 'stumpsY']])
-    plot_heatmap(xy, run)
+    rh = run_data[run_data.rightHandedBat == True]
+    xy = np.array(rh[['pitchX', 'pitchY']])
+    plot_heatmap(xy, run, "Right Handed")
+    plt.show()
 
+    lh = run_data[run_data.rightHandedBat == False]
+    xy = np.array(lh[['pitchX', 'pitchY']])
+    plot_heatmap(xy, run, "Left Handed")
     plt.show()
 
 # bowled = mipl_csv[mipl_csv['dismissalDetails'].str[0] == "b"]
