@@ -1,6 +1,6 @@
 from matplotlib import pyplot as plt
 
-from query_utils import filter_by_pitch_x_pitch_y, cumulative, load_csv_data_mipl, merge_no_balls_and_wides
+from data_processing.query_utils import filter_by_pitch_x_pitch_y, cumulative, load_csv_data_mipl, merge_no_balls_and_wides
 
 
 def plot_innings(data, match_id, innings):

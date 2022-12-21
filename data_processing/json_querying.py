@@ -6,7 +6,7 @@ import pandas as pd
 
 
 def get_json_directory_names():
-    path_to_json = 'ipl_2022_data/ball_by_ball'
+    path_to_json = '../ipl_2022_data/ball_by_ball'
     return [pos_json for pos_json in os.listdir(path_to_json) if pos_json.endswith('.json')]
 
 
@@ -15,7 +15,7 @@ def load_json_data_mipl():
 
     json_data = []
     for index, js in enumerate(json_files):
-        with open(os.path.join('ipl_2022_data/ball_by_ball', js)) as json_file:
+        with open(os.path.join('../ipl_2022_data/ball_by_ball', js)) as json_file:
             json_data.append(json.load(json_file))
             json_file.close()
 

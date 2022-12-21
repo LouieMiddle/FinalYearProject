@@ -20,5 +20,5 @@ def filter_by_pitch_x_pitch_y(data):
 
 
 def load_csv_data_mipl():
-    csv_path = os.path.join("HawkeyeStats-main", "mensIPLHawkeyeStats.csv")
+    csv_path = os.path.join("../HawkeyeStats-main", "mensIPLHawkeyeStats.csv")
     return pd.read_csv(csv_path)

@@ -2,7 +2,7 @@ import numpy as np
 import scipy
 from matplotlib import pyplot as plt
 
-from query_utils import filter_by_pitch_x_pitch_y, load_csv_data_mipl, merge_no_balls_and_wides
+from data_processing.query_utils import filter_by_pitch_x_pitch_y, load_csv_data_mipl, merge_no_balls_and_wides
 
 
 def get_runs_per_over_innings(data):
